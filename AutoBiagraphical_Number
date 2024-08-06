@@ -1,0 +1,46 @@
+import java.util.Scanner;
+import java.util.Set;                  //2020 is a autobiagraphical number
+import java.util.HashSet;              //2-0's and 2-2's in numbers so 1st position 2 shows 2-0's and 3rd position shows 2-2's and remaining are 0.
+public class autobiograpical {				//first position shows how many 0's in numbers and 2nd position shows how many
+	public static int check(String p)		//1's in numbers and 3rd position shows how many 2's in numbers and so on..
+	{
+		if(p==null || p.length()==0)
+		{
+			return 0;
+		}
+		int l=p.length();
+		int[] arr=new int[l];
+		for(char c:p.toCharArray())
+		{
+			if(c<'0' || c>'9')
+			{
+				return 0;
+			}
+			int digit=c-'0';
+			if(digit>l)
+			{
+				return 0;
+			}
+			arr[digit]++;
+		}
+		for(int i=0;i<l;i++)
+		{
+			if(arr[i]!=p.charAt(i)-'0')
+				return 0;
+		}
+		Set<Character> digitsize=new HashSet<>();
+		for(char c:p.toCharArray())
+		{
+			digitsize.add(c);
+		}
+		return digitsize.size();
+	}
+	
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the number:");
+		String p=sc.nextLine();
+		System.out.println("the unique no: "+autobiograpical.check(p));
+	}
+
+}
